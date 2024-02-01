@@ -30,15 +30,35 @@ while (have_posts()) {
 
 
 
-    <!--     
-    <div class="page-links">
-      <h2 class="page-links__title"><a href="#">About Us</a></h2>
-      <ul class="min-list">
-        <li class="current_page_item"><a href="#">Our History</a></li>
-        <li><a href="#">Our Goals</a></li>
-      </ul>
-    </div>
-    -->
+    <?php
+
+    $children = get_pages(array('child_of' => get_the_ID()));
+
+    if ($parent or $children) { ?>
+      <div class="page-links">
+        <h2 class="page-links__title"><a href="<?php echo get_permalink($parent) ?>"><?php echo get_the_title($parent) ?></a></h2>
+        <ul class="min-list">
+          <!-- <li class="current_page_item"><a href="#">Our History</a></li>
+        <li><a href="#">Our Goals</a></li> -->
+          <?php
+
+          if ($parent) {
+            // If we are on a child page
+            // $parent will be set to non zero
+            $child = $parent;
+          } else {
+            // Not on parent page
+            $child = get_the_ID();
+          }
+          wp_list_pages(array(
+            'title_li' => null,
+            'child_of' => $child,
+            'sort_column' => 'menu_order'
+          ));
+          ?>
+        </ul>
+      </div>
+    <?php } ?>
 
     <div class="generic-content">
       <?php the_content(); ?>
