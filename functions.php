@@ -11,6 +11,7 @@ function university_files()
 
 add_action('wp_enqueue_scripts', 'university_files');
 
+
 function university_features()
 {
   // To add Title to page/browser tab
@@ -20,6 +21,5 @@ function university_features()
   register_nav_menu('footer1', 'Footer 1');
   register_nav_menu('footer2', 'Footer 2');
 }
-
 
 add_action('after_setup_theme', 'university_features');
