@@ -44,7 +44,7 @@ while (have_posts()) {
                         <span class="professor-card__name"><?php the_title(); ?></span>
                     </a>
                 </li>
-        <?php
+            <?php
             }
             echo '</ul>';
 
@@ -75,6 +75,20 @@ while (have_posts()) {
                 get_template_part('/template-parts/event');
             }
             wp_reset_postdata();
+        }
+
+        $relatedCampuses = get_field('related_campus');
+        // print_r($relatedCampuses);
+        if ($relatedCampuses) {
+            echo '<hr class="section-break">';
+            echo '<h2 class="headline headline--medium">' . get_the_title() . ' is available at these Campuses:</h2>';
+            echo '<ul class="link-list min-list">';
+            foreach ($relatedCampuses as $campus) {
+            ?>
+                <li><a href="<?php echo $campus->guid; ?>"><?php echo $campus->post_title ?></a></li>
+        <?php
+            }
+            echo '</ul>';
         }
         ?>
 

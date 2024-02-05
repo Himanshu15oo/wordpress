@@ -55,9 +55,9 @@ function university_features()
   add_image_size('pageBanner', 1500, 350, true);
 
   // To add menu support
-  register_nav_menu('header', 'Header Menu');
-  register_nav_menu('footer1', 'Footer 1');
-  register_nav_menu('footer2', 'Footer 2');
+  // register_nav_menu('header', 'Header Menu');
+  // register_nav_menu('footer1', 'Footer 1');
+  // register_nav_menu('footer2', 'Footer 2');
 }
 
 add_action('after_setup_theme', 'university_features');
