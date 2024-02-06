@@ -177,11 +177,17 @@ class Search {
           
         ${res.programs.length ? "</ul>" : ""}
         <h2 class="search-overlay__section-title">Professors</h2>
-        ${res.professors.length ? '<ul class="link-list min-list">' : `<p>No Professors matches the search.</p>`}
+        ${res.professors.length ? '<ul class="professor-cards">' : `<p>No Professors matches the search.</p>`}
         
         ${res.professors.map(data => {
-        return `<li><a href="${data.link}">${data.title}</a> 
-            ${data.type == "post" ? "by " + data.author : ""}</li>`;
+        return `
+            <li class="professor-card__list-item">
+                    <a class="professor-card" href="${data.link}">
+                        <img class="professor-card__image" src="${data.photo}" alt="">
+                        <span class="professor-card__name">${data.title}</span>
+                    </a>
+                </li>
+            `;
       }).join("")}
           
         ${res.professors.length ? "</ul>" : ""}
@@ -198,11 +204,21 @@ class Search {
           
         ${res.campuses.length ? "</ul>" : ""}
         <h2 class="search-overlay__section-title">Event</h2>
-        ${res.events.length ? '<ul class="link-list min-list">' : `<p>No Event matches the search.<a href="${universityData.root_url}/events">View all Events</a></p>`}
+        ${res.events.length ? "" : `<p>No Event matches the search.<a href="${universityData.root_url}/events">View all Events</a></p>`}
         
         ${res.events.map(data => {
-        return `<li><a href="${data.link}">${data.title}</a> 
-            ${data.type == "post" ? "by " + data.author : ""}</li>`;
+        return `
+            <div class="event-summary">
+                <a class="event-summary__date t-center" href="${data.link}">
+                    <span class="event-summary__month">${data.month}</span>
+                    <span class="event-summary__day">${data.day}</span>
+                </a>
+                <div class="event-summary__content">
+                    <h5 class="event-summary__title headline headline--tiny"><a href="${data.link}">${data.title}</a></h5>
+                    <p>${data.description} <a href="${data.link}" class="nu gray">Learn more</a></p>
+                </div>
+            </div>
+            `;
       }).join("")}
           
         ${res.events.length ? "</ul>" : ""}
