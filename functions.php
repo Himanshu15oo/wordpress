@@ -1,5 +1,7 @@
 <?php
 
+require get_theme_file_path('/include/search-route.php');
+
 function university_rest_api()
 {
   register_rest_field(
