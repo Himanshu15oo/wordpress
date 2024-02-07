@@ -72,7 +72,7 @@ while (have_posts()) {
 
             while ($homepageEvents->have_posts()) {
                 $homepageEvents->the_post();
-                get_template_part('/template-parts/event');
+                get_template_part('template-parts/content', 'event');
             }
             wp_reset_postdata();
         }

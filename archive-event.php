@@ -12,7 +12,7 @@ pageBanner(array(
     <?php
     while (have_posts()) {
         the_post();
-        get_template_part('/template-parts/event');
+        get_template_part('template-parts/content', 'event');
     }
     echo paginate_links();
     ?>
