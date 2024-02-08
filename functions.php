@@ -160,3 +160,26 @@ function login_css()
   wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
   wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
 }
+
+// Force post to be private
+// Runs when any type of post is saved, if's necessary
+add_filter('wp_insert_post_data', 'make_note_private', 10, 2);
+
+function make_note_private($data, $post_arr)
+{
+  if ($data['post_type'] == 'note') {
+
+    if (count_user_posts(get_current_user_id(), 'note') > 4 and !$post_arr['ID']) {
+      die('You have reached your note limit');
+    }
+
+    $data['post_title'] = sanitize_text_field($data['post_title']);
+    $data['post_content'] = sanitize_textarea_field($data['post_content']);
+  }
+
+  // Making notes publish -> private
+  if ($data['post_type'] == 'note' and $data['post_status'] != 'trash') {
+    $data['post_status'] = 'private';
+  }
+  return $data;
+}
